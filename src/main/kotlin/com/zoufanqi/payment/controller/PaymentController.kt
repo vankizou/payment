@@ -67,7 +67,7 @@ class PaymentController @Autowired constructor(
             paymentMoney += record.money
         }
 
-        val mv = ModelAndView("/payment")
+        val mv = ModelAndView("payment")
         mv.addObject("totalMoney", df.format(totalMoney))
         mv.addObject("paymentMoney", df.format(paymentMoney))
         mv.addObject("leftMoney", df.format(totalMoney - paymentMoney))
@@ -77,5 +77,5 @@ class PaymentController @Autowired constructor(
     }
 
     @RequestMapping("/v/token")
-    fun tokenHtml() = "/token"
+    fun tokenHtml() = "token"
 }
