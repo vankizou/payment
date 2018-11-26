@@ -25,4 +25,5 @@
 /.nb-gradle/
 
 
+logs/
 application*-online*
