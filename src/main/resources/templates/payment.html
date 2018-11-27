@@ -8,9 +8,9 @@
 
     <link rel="stylesheet" th:href="@{/bootstrap4.1.3/bootstrap.min.css}">
 
-    <script src="/bootstrap4.1.3/jquery-3.3.1.slim.min.js"></script>
-    <script src="/bootstrap4.1.3/popper.min.js"></script>
-    <script src="/bootstrap4.1.3/bootstrap.min.js"></script>
+    <script th:src="@{/bootstrap4.1.3/jquery-3.3.1.slim.min.js}"></script>
+    <script th:src="@{/bootstrap4.1.3/popper.min.js}"></script>
+    <script th:src="@{/bootstrap4.1.3/bootstrap.min.js}"></script>
 
     <style>
         div {
@@ -19,13 +19,13 @@
         }
 
         .tab1 {
+            width: 100px;
             float: left;
             display: inline-block;
             padding-right: 0px;
         }
 
         .tab2 {
-            float: left;
             display: inline-block;
             overflow: hidden;
             overflow-x: scroll;
@@ -45,13 +45,13 @@
         }
 
         .tab1 th {
-            padding-left: 0.45rem;
-            padding-right: 0.5rem;
+            /*padding-left: 0.45rem;*/
+            /*padding-right: 0.5rem;*/
         }
 
         .tab1 td {
-            padding-left: 0.45rem;
-            padding-right: 0.5rem;
+            /*padding-left: 0.45rem;*/
+            /*padding-right: 0.5rem;*/
         }
 
         .tab2 td {
@@ -70,7 +70,7 @@
     </div>
     <div class="panel-body">
         <div>
-            <table class="tab1 table table-striped col-md-1">
+            <table class="tab1 table table-striped">
                 <thead>
                 <tr>
                     <th scope="col">还款日期</th>
@@ -89,7 +89,7 @@
                 </tbody>
             </table>
 
-            <table class="tab2 table table-striped col-md-11">
+            <table class="tab2 table table-striped">
                 <thead>
                 <tr>
                     <th scope="col">已还款额</th>
@@ -194,6 +194,7 @@
 <script type="text/javascript">
     $(function () {
         $('#j_td_img_left').height($('.td_img').height());
+        $('.tab2').width($(document).width() - $('.tab1').width() - 85);
     });
 </script>
 
