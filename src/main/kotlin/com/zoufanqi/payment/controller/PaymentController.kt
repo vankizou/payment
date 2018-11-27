@@ -1,9 +1,11 @@
 package com.zoufanqi.payment.controller
 
 import com.zoufanqi.payment.service.PaymentService
+import com.zoufanqi.payment.service.TokenService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.servlet.ModelAndView
 import java.math.BigDecimal
 import java.text.DecimalFormat
@@ -16,7 +18,8 @@ import java.util.*
 @Controller
 @RequestMapping("/")
 class PaymentController @Autowired constructor(
-        private val paymentService: PaymentService
+        private val paymentService: PaymentService,
+        private val tokenService: TokenService
 ) : BaseController() {
     private val df = DecimalFormat(",##0.00")
 
@@ -83,4 +86,7 @@ class PaymentController @Autowired constructor(
 
     @RequestMapping("/payment/token")
     fun tokenHtml() = "token"
+
+    @ResponseBody
+    fun getToken(t: String?) = if (t == null) "" else this.tokenService.getToken()
 }
