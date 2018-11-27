@@ -88,5 +88,6 @@ class PaymentController @Autowired constructor(
     fun tokenHtml() = "token"
 
     @ResponseBody
+    @RequestMapping("/payment/getToken")
     fun getToken(t: String?) = if (t == null) "" else this.tokenService.getToken()
 }
