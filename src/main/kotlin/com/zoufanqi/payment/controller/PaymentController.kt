@@ -8,18 +8,19 @@ import org.springframework.web.servlet.ModelAndView
 import java.math.BigDecimal
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Created by vanki on 2018-11-24 09:23.
  */
 @Controller
-@RequestMapping("/")
+@RequestMapping("/p")
 class PaymentController @Autowired constructor(
         private val paymentService: PaymentService
 ) : BaseController() {
     private val df = DecimalFormat(",###.00")
 
-    @RequestMapping("/v")
+    @RequestMapping("/list")
     fun payment(): ModelAndView {
         val result = this.paymentService.paymentData()
 
@@ -27,7 +28,7 @@ class PaymentController @Autowired constructor(
          * 组装人员基本信息
          */
         var totalMoney = BigDecimal.ZERO
-        val changedRenters = mutableListOf<Map<String, String>>()
+        val changedRenters = mutableListOf<Map<String, Any>>()
         result.renters.forEach {
             val renterId = it.key
             val renter = it.value
@@ -40,7 +41,8 @@ class PaymentController @Autowired constructor(
                                     if (result.allocationDataMap.containsKey(renterId))
                                         df.format(result.allocationDataMap[renterId]!!.currMoney)
                                     else
-                                        "0.00"
+                                        "0.00",
+                            "qrImg" to (renter.qrImg ?: Collections.EMPTY_MAP)
                     ))
             totalMoney += renter.money
         }
@@ -50,7 +52,7 @@ class PaymentController @Autowired constructor(
          */
         var paymentMoney = BigDecimal.ZERO
         val changedRecords = mutableListOf<Map<String, Any>>()
-        result.records.forEach { record ->
+        result.records.reversed().forEach { record ->
             val currRecordGetMoneys = mutableListOf<String>()   // 本次分配获取得的金额
             val recordJson = record.record!!
             result.renters.keys.forEach {
@@ -76,6 +78,6 @@ class PaymentController @Autowired constructor(
         return mv
     }
 
-    @RequestMapping("/v/token")
+    @RequestMapping("/p/token")
     fun tokenHtml() = "token"
 }

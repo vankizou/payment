@@ -44,6 +44,7 @@ CREATE TABLE `renter` (
   `name` varchar(20) NOT NULL DEFAULT '',
   `money` double NOT NULL,
   `end_date` date DEFAULT NULL,
+  `qr_img` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

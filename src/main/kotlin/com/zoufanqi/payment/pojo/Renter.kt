@@ -14,4 +14,6 @@ class Renter {
     lateinit var money: BigDecimal
 
     var endDate: Date? = null
+
+    var qrImg: LinkedHashMap<String, String>? = null
 }
