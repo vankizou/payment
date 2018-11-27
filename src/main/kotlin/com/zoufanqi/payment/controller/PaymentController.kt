@@ -14,13 +14,13 @@ import java.util.*
  * Created by vanki on 2018-11-24 09:23.
  */
 @Controller
-@RequestMapping("/p")
+@RequestMapping("/")
 class PaymentController @Autowired constructor(
         private val paymentService: PaymentService
 ) : BaseController() {
     private val df = DecimalFormat(",###.00")
 
-    @RequestMapping("/list")
+    @RequestMapping("/p")
     fun payment(): ModelAndView {
         val result = this.paymentService.paymentData()
 
@@ -78,6 +78,6 @@ class PaymentController @Autowired constructor(
         return mv
     }
 
-    @RequestMapping("/token")
+    @RequestMapping("/p/token")
     fun tokenHtml() = "token"
 }
