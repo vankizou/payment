@@ -42,6 +42,9 @@ class PaymentController @Autowired constructor(
                                         df.format(result.allocationDataMap[renterId]!!.currMoney)
                                     else
                                         "0.00",
+                            "leftMoney" to
+                                    df.format(renter.money - (result.allocationDataMap[renterId]?.currMoney
+                                            ?: BigDecimal.ZERO)),
                             "qrImg" to (renter.qrImg ?: Collections.EMPTY_MAP)
                     ))
             totalMoney += renter.money
