@@ -23,7 +23,7 @@ class LoginInterceptor @Autowired constructor(
         response.contentType = "application/json;charset=UTF-8"
 
         val uri = request.requestURI
-        if (uri.startsWith("/p/token")) return true
+        if (uri.startsWith("/payment/token")) return true
 
         val tokenName = "token"
         val paramToken = request.getParameter(tokenName)
@@ -43,7 +43,7 @@ class LoginInterceptor @Autowired constructor(
     }
 
     private fun redirectToTokenHtml(res: HttpServletResponse) {
-        res.sendRedirect("/p/token")
+        res.sendRedirect("/payment/token")
     }
 
 }
