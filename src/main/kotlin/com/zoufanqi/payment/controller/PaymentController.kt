@@ -20,7 +20,7 @@ class PaymentController @Autowired constructor(
 ) : BaseController() {
     private val df = DecimalFormat(",###.00")
 
-    @RequestMapping("/p")
+    @RequestMapping("/p/list")
     fun payment(): ModelAndView {
         val result = this.paymentService.paymentData()
 
