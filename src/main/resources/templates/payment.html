@@ -19,6 +19,25 @@
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
     <style>
+        div {
+            width: 100%;
+            white-space: nowrap;
+        }
+
+        .tab1 {
+            float: left;
+            display: inline-block;
+            padding-right: 0px;
+        }
+
+        .tab2 {
+            float: left;
+            display: inline-block;
+            overflow: hidden;
+            overflow-x: scroll;
+            padding-left: 3px;
+        }
+
         .td_img img {
             width: 150px;
         }
@@ -34,61 +53,134 @@
 </head>
 <body>
 <div class="panel panel-default">
-    <!-- Default panel contents -->
     <div class="panel-heading">
         <div th:text="'总额：' + ${totalMoney} + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;已还额：' + ${paymentMoney} + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;剩余额：' + ${leftMoney}"
              style="padding: 14px"></div>
     </div>
     <div class="panel-body">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">还款日期</th>
-                <th scope="col">还款额</th>
-                <th scope="col" th:each="r: ${renters}" th:text="${r.name}"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td scope="row"></td>
-                <td scope="row" th:text="${paymentMoney}"></td>
-                <td scope="row" th:each="r: ${renters}" th:text="${r.currMoney} +'/' + ${r.money}"></td>
-            </tr>
-            <tr>
-                <td scope="row"></td>
-                <td scope="row"></td>
-                <td scope="row" class="td_img" th:each="r, s: ${renters}">
-                    <div class="tabbable">
-                        <ul class="nav nav-tabs">
-                            <li th:each="qrImgKey, s2: ${r.qrImg.keySet()}"
-                                th:class="${(s2.index == 0) ? 'active' : ''}">
-                                <a data-toggle="tab"
-                                   th:text="${qrImgKey}"
-                                   th:href="@{'#tab' + ${s.index} + ${qrImgKey}}"
-                                   style="font-size: 12px; color: grey;"></a>
-                            </li>
-                        </ul>
-                        <div class="tab-content">
-                            <div th:each="qrImg, s2: ${r.qrImg}"
-                                 th:class="'tab-pane ' + ${(s2.index == 0) ? 'active' : ''}"
-                                 th:id="'tab' + ${s.index} + ${qrImg.key}">
-                                <img th:src="${qrImg.value}">
+        <div>
+            <table class="tab1 table table-striped col-md-1">
+                <thead>
+                <tr>
+                    <th scope="col">还款日期</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td scope="row">-</td>
+                </tr>
+                <tr>
+                    <td scope="row" id="j_td_img_left"></td>
+                </tr>
+                <tr th:each="rec: ${records}">
+                    <td scope="row" th:text="${rec.day}"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table class="tab2 table table-striped col-md-11">
+                <thead>
+                <tr>
+                    <th scope="col">已还款额</th>
+                    <th scope="col" th:each="r: ${renters}" th:text="${r.name}"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td scope="row" th:text="${paymentMoney}"></td>
+                    <td scope="row" th:each="r: ${renters}" th:text="${r.currMoney} +'/' + ${r.money}"></td>
+                </tr>
+                <tr>
+                    <td scope="row"></td>
+                    <td scope="row" class="td_img" th:each="r, s: ${renters}">
+                        <div class="tabbable">
+                            <ul class="nav nav-tabs">
+                                <li th:each="qrImgKey, s2: ${r.qrImg.keySet()}"
+                                    th:class="${(s2.index == 0) ? 'active' : ''}">
+                                    <a data-toggle="tab"
+                                       th:text="${qrImgKey}"
+                                       th:href="@{'#tab' + ${s.index} + ${qrImgKey}}"
+                                       style="font-size: 12px; color: grey;"></a>
+                                </li>
+                            </ul>
+                            <div class="tab-content">
+                                <div th:each="qrImg, s2: ${r.qrImg}"
+                                     th:class="'tab-pane ' + ${(s2.index == 0) ? 'active' : ''}"
+                                     th:id="'tab' + ${s.index} + ${qrImg.key}">
+                                    <img th:src="${qrImg.value}">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </td>
-            </tr>
-            <tr th:each="rec: ${records}">
-                <td scope="row" th:text="${rec.day}"></td>
-                <td scope="row" th:text="${rec.money}"></td>
-                <td scope="row" th:each="rmg: ${rec.moneyGets}" th:text="${rmg}"></td>
-            </tr>
+                    </td>
+                </tr>
+                <tr th:each="rec: ${records}">
+                    <td scope="row" th:text="${rec.money}"></td>
+                    <td scope="row" th:each="rmg: ${rec.moneyGets}" th:text="${rmg}"></td>
+                </tr>
+                </tbody>
+            </table>
 
-            </tbody>
-        </table>
+        </div>
+
+        <!--<div>
+            <div class="custom-table&#45;&#45;body-wrapper is-fixed">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">还款日期</th>
+                        <th scope="col">还款额</th>
+                        <th scope="col" th:each="r: ${renters}" th:text="${r.name}"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td scope="row"></td>
+                        <td scope="row" th:text="${paymentMoney}"></td>
+                        <td scope="row" th:each="r: ${renters}" th:text="${r.currMoney} +'/' + ${r.money}"></td>
+                    </tr>
+                    <tr>
+                        <td scope="row"></td>
+                        <td scope="row"></td>
+                        <td scope="row" class="td_img" th:each="r, s: ${renters}">
+                            <div class="tabbable">
+                                <ul class="nav nav-tabs">
+                                    <li th:each="qrImgKey, s2: ${r.qrImg.keySet()}"
+                                        th:class="${(s2.index == 0) ? 'active' : ''}">
+                                        <a data-toggle="tab"
+                                           th:text="${qrImgKey}"
+                                           th:href="@{'#tab' + ${s.index} + ${qrImgKey}}"
+                                           style="font-size: 12px; color: grey;"></a>
+                                    </li>
+                                </ul>
+                                <div class="tab-content">
+                                    <div th:each="qrImg, s2: ${r.qrImg}"
+                                         th:class="'tab-pane ' + ${(s2.index == 0) ? 'active' : ''}"
+                                         th:id="'tab' + ${s.index} + ${qrImg.key}">
+                                        <img th:src="${qrImg.value}">
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr th:each="rec: ${records}">
+                        <td scope="row" th:text="${rec.day}"></td>
+                        <td scope="row" th:text="${rec.money}"></td>
+                        <td scope="row" th:each="rmg: ${rec.moneyGets}" th:text="${rmg}"></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>-->
     </div>
 </div>
+</div>
 
+<script type="text/javascript">
+    $(function () {
+        $('#j_td_img_left').height($('.td_img').height());
+    });
+</script>
 
 </body>
 </html>
