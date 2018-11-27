@@ -33,7 +33,7 @@
         }
 
         .td_img img {
-            width: 150px;
+            width: 180px;
         }
 
         .td_img li {
@@ -115,7 +115,7 @@
                                     <a data-toggle="tab"
                                        th:text="${qrImgKey}"
                                        th:href="@{'#tab' + ${s.index} + ${qrImgKey}}"
-                                       style="font-size: 12px; color: grey;"></a>
+                                       style="font-size: 13px; color: grey;"></a>
                                 </li>
                             </ul>
                             <div class="tab-content">
@@ -195,6 +195,11 @@
     $(function () {
         $('#j_td_img_left').height($('.td_img').height());
         $('.tab2').width($(document).width() - $('.tab1').width() - 100);
+
+        $('.tab2 a').click(function () {
+            $('.tab2 a').css("color", "grey");
+            $(this).css("color", "green");
+        });
     });
 </script>
 
