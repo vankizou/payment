@@ -18,7 +18,7 @@ import java.util.*
 class PaymentController @Autowired constructor(
         private val paymentService: PaymentService
 ) : BaseController() {
-    private val df = DecimalFormat(",###.00")
+    private val df = DecimalFormat(",##0.00")
 
     @RequestMapping("/payment/list")
     fun payment(): ModelAndView {
