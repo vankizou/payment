@@ -78,6 +78,6 @@ class PaymentController @Autowired constructor(
         return mv
     }
 
-    @RequestMapping("/p/token")
+    @RequestMapping("/token")
     fun tokenHtml() = "token"
 }
