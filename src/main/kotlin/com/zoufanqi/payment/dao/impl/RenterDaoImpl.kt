@@ -5,10 +5,12 @@ import com.alibaba.fastjson.TypeReference
 import com.qiqinote.util.sql.NamedSQLUtil
 import com.zoufanqi.payment.dao.RenterDao
 import com.zoufanqi.payment.pojo.Renter
+import org.apache.commons.lang3.StringUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jdbc.core.BeanPropertyRowMapper
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate
 import org.springframework.stereotype.Repository
+import java.util.*
 
 /**
  * Created by vanki on 2018/11/23 16:12.
@@ -28,7 +30,9 @@ class RenterDaoImpl @Autowired constructor(
             r.name = rs.getString("name")
             r.money = rs.getBigDecimal("money")
             r.endDate = rs.getDate("end_date")
-            r.qrImg = JSON.parseObject(rs.getString("qr_img"), object : TypeReference<LinkedHashMap<String, String>>() {})
+
+            val qrImgStr = rs.getString("qr_img")
+            r.qrImg = if (StringUtils.isBlank(qrImgStr)) linkedMapOf() else JSON.parseObject(qrImgStr, object : TypeReference<LinkedHashMap<String, String>>() {})
             r
         }
     }
