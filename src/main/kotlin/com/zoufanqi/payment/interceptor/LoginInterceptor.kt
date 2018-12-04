@@ -24,6 +24,7 @@ class LoginInterceptor @Autowired constructor(
 
         val uri = request.requestURI
         if (uri.startsWith("/payment/token")) return true
+        if (uri.contentEquals(".")) return true
 
         val tokenName = "token"
         val paramToken = request.getParameter(tokenName)

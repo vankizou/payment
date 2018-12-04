@@ -26,7 +26,6 @@ class PaymentController @Autowired constructor(
     @RequestMapping("/payment/list")
     fun payment(): ModelAndView {
         val result = this.paymentService.paymentData()
-
         /**
          * 组装人员基本信息
          */
