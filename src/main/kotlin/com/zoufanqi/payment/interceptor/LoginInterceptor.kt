@@ -22,9 +22,9 @@ class LoginInterceptor @Autowired constructor(
         response.characterEncoding = "UTF-8"
         response.contentType = "application/json;charset=UTF-8"
 
-        val uri = request.requestURI
+        val uri = request.requestURI!!
         if (uri.startsWith("/payment/token")) return true
-        if (uri.contentEquals(".")) return true
+        if (uri.contains('.')) return true
 
         val tokenName = "token"
         val paramToken = request.getParameter(tokenName)
