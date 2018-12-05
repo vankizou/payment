@@ -30,7 +30,7 @@ CREATE TABLE `payment_record` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `money` double NOT NULL,
   `day` date NOT NULL,
-  `record` varchar(300) DEFAULT NULL,
+  `record` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -44,7 +44,7 @@ CREATE TABLE `renter` (
   `name` varchar(20) NOT NULL DEFAULT '',
   `money` double NOT NULL,
   `end_date` date DEFAULT NULL,
-  `qr_img` varchar(300) DEFAULT NULL,
+  `qr_img` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
