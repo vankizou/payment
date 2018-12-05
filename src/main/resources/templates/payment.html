@@ -19,7 +19,7 @@
         }
 
         .tab1 {
-            width: 100px;
+            width: 213px;
             float: left;
             display: inline-block;
             padding-right: 0px;
@@ -74,17 +74,21 @@
                 <thead>
                 <tr>
                     <th scope="col">还款日期</th>
+                    <th scope="col">已还款额</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                     <td scope="row">-</td>
+                    <td scope="row" th:text="${paymentMoney}"></td>
                 </tr>
                 <tr>
                     <td scope="row" id="j_td_img_left"></td>
+                    <td></td>
                 </tr>
                 <tr th:each="rec: ${records}">
                     <td scope="row" th:text="${rec.day}" style="font-weight: 700;"></td>
+                    <td scope="row" th:text="${rec.money}"></td>
                 </tr>
                 </tbody>
             </table>
@@ -92,13 +96,11 @@
             <table class="tab2 table table-striped">
                 <thead>
                 <tr>
-                    <th scope="col">已还款额</th>
                     <th scope="col" th:each="r: ${renters}" th:text="${r.name}"></th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td scope="row" th:text="${paymentMoney}"></td>
                     <td scope="row" th:each="r: ${renters}">
                         <span th:text="${r.money}"></span> -
                         <span th:text="${r.currMoney}" style="color: green;"></span> =
@@ -106,7 +108,6 @@
                     </td>
                 </tr>
                 <tr>
-                    <td scope="row"></td>
                     <td scope="row" class="td_img" th:each="r, s: ${renters}">
                         <div class="tabbable">
                             <ul class="nav nav-tabs">
@@ -129,7 +130,6 @@
                     </td>
                 </tr>
                 <tr th:each="rec: ${records}">
-                    <td scope="row" th:text="${rec.money}"></td>
                     <td scope="row" th:each="rmg: ${rec.moneyGets}" th:text="${rmg}"></td>
                 </tr>
                 </tbody>
@@ -194,7 +194,7 @@
 <script type="text/javascript">
     $(function () {
         $('#j_td_img_left').height($('.td_img').height());
-        $('.tab2').width($(document).width() - $('.tab1').width() - 100);
+        $('.tab2').width($(document).width() - $('.tab1').width() - 213);
 
         $('.tab2 a').click(function () {
             $('.tab2 a').css("color", "grey");
