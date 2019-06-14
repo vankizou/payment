@@ -97,7 +97,7 @@ class PaymentServiceImpl @Autowired constructor(
             val ad = allocationDataMap[renterId]!!
             val left = renter.money - ad.currMoney // 剩余未还款
 
-            val ratio = left.divide(leftTotalMoney, 4, RoundingMode.HALF_EVEN)   // 比例
+            val ratio = left.divide(leftTotalMoney, 4, RoundingMode.HALF_UP)   // 比例
             val ratioMoney = ratio * record.money  // 按比例本次能得到的钱
 
             ad.currMoney = ad.currMoney + ratioMoney
